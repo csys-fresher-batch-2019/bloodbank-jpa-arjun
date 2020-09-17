@@ -6,43 +6,49 @@ import com.chainsys.bloodbankapp.dao.BloodGroupDAO;
 import com.chainsys.bloodbankapp.dao.impl.BloodGroupDAOImpl;
 import com.chainsys.bloodbankapp.exception.DbException;
 import com.chainsys.bloodbankapp.exception.ServiceException;
+import com.chainsys.bloodbankapp.exception.ValidatorException;
 import com.chainsys.bloodbankapp.model.BloodGroup;
+import com.chainsys.bloodbankapp.validator.BloodGroupValidator;
 
 public class BloodGroupService {
 
 	private BloodGroupDAO bloodGroupDAO = new BloodGroupDAOImpl();
 
-	public BloodGroup findByBloodGroupName(String bloodGroup) throws DbException, ServiceException {
+	private BloodGroupValidator bloodGroupValidator = new BloodGroupValidator();
 
-		BloodGroup bloodGroupId;
+	public BloodGroup findByBloodGroupName(String bloodGroup) throws ServiceException {
+
+		BloodGroup bloodGroupObj;
 		try {
-			bloodGroupId = bloodGroupDAO.findByBloodGroupName(bloodGroup);
-		} catch (Exception e) {
+			bloodGroupValidator.validateBloodGroup(bloodGroup);
+			bloodGroupObj = bloodGroupDAO.findByBloodGroupName(bloodGroup);
+		} catch (DbException e) {
 			e.printStackTrace();
 			throw new ServiceException("Unable to fetch BloodGroup Details");
 		}
-		return bloodGroupId;
+		return bloodGroupObj;
 
 	}
 
-	List<BloodGroup> findAll() throws ServiceException {
+	public List<BloodGroup> findAll() throws ServiceException {
 
 		List<BloodGroup> list;
 		try {
 			list = bloodGroupDAO.findAll();
-		} catch (Exception e) {
+		} catch (DbException e) {
 			e.printStackTrace();
 			throw new ServiceException("Unable to fetch BloodGroup Details");
 		}
 		return list;
 	}
 
-	BloodGroup findOne(int bloodGroupId) throws ServiceException {
+	public BloodGroup findOne(int bloodGroupId) throws ServiceException {
 
 		BloodGroup bloodGroup;
 		try {
+			bloodGroupValidator.validateBloodGroupId(bloodGroupId);
 			bloodGroup = bloodGroupDAO.findOne(bloodGroupId);
-		} catch (Exception e) {
+		} catch (DbException e) {
 			e.printStackTrace();
 			throw new ServiceException("Unable to fetch BloodGroup Details");
 		}
@@ -50,33 +56,53 @@ public class BloodGroupService {
 
 	}
 
-	void delete(int bloodGroupId) throws ServiceException {
+	public void delete(int bloodGroupId) throws ServiceException {
 
 		try {
+			bloodGroupValidator.validateBloodGroupId(bloodGroupId);
+			BloodGroup bloodGroup = bloodGroupDAO.findOne(bloodGroupId);
+			if (bloodGroup == null) {
+				throw new ValidatorException("Invalid BloodGroupId");
+			}
 			bloodGroupDAO.delete(bloodGroupId);
-		} catch (Exception e) {
+		} catch (DbException e) {
 			e.printStackTrace();
 			throw new ServiceException("Unable to delete Blood Group");
 		}
 
 	}
 
-	void save(BloodGroup bloodGroup) throws ServiceException {
-
+	public void save(BloodGroup bloodGroup) throws ServiceException {
+		
 		try {
+			bloodGroupValidator.validateBloodGroup(bloodGroup);
+			BloodGroup bloodGroupObj = bloodGroupDAO.findByBloodGroupName(bloodGroup.getBloodGroup());
+			if (bloodGroupObj != null) {
+				throw new ValidatorException("BloodGroup name already exists");
+			}
 			bloodGroupDAO.save(bloodGroup);
-		} catch (Exception e) {
+		} catch (DbException e) {
 			e.printStackTrace();
 			throw new ServiceException("Unable to save Blood Group");
 		}
 
 	}
 
-	void update(BloodGroup bloodGroup) throws ServiceException {
+	public void update(BloodGroup bloodGroup) throws ServiceException {
 
 		try {
+			bloodGroupValidator.validateBloodGroup(bloodGroup);
+			bloodGroupValidator.validateBloodGroupId(bloodGroup.getBloodGroupId());
+			BloodGroup bloodGroupObj = bloodGroupDAO.findOne(bloodGroup.getBloodGroupId());
+			if (bloodGroupObj == null) {
+				throw new ValidatorException("Invalid BloodGroupId");
+			}
+			BloodGroup bloodGroupObj2 = bloodGroupDAO.findByBloodGroupName(bloodGroup.getBloodGroup());
+			if (bloodGroupObj2 != null) {
+				throw new ValidatorException("BloodGroup Name already exists");
+			}
 			bloodGroupDAO.update(bloodGroup);
-		} catch (Exception e) {
+		} catch (DbException e) {
 			e.printStackTrace();
 			throw new ServiceException("Unable to update BloodGroup");
 		}

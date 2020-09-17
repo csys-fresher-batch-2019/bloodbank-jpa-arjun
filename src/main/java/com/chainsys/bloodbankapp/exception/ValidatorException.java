@@ -1,6 +1,6 @@
 package com.chainsys.bloodbankapp.exception;
 
-public class ValidatorException extends Exception {
+public class ValidatorException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 

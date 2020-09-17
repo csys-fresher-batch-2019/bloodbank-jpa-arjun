@@ -31,7 +31,7 @@ public class BloodGroupDAOImpl implements BloodGroupDAO {
 		return bg;
 	}
 
-	public List<BloodGroup> findAll() {
+	public List<BloodGroup> findAll() throws DbException {
 		EntityManager em = emf.createEntityManager();
 		TypedQuery<BloodGroup> query = em.createQuery("from BloodGroup b ", BloodGroup.class);
 		List<BloodGroup> list = query.getResultList();
@@ -39,7 +39,7 @@ public class BloodGroupDAOImpl implements BloodGroupDAO {
 		return list;
 	}
 
-	public BloodGroup findOne(int bloodGroupId) {
+	public BloodGroup findOne(int bloodGroupId) throws DbException {
 		BloodGroup bg = null;
 		try {
 			EntityManager em = emf.createEntityManager();

@@ -9,9 +9,9 @@ public interface BloodGroupDAO {
 
 	BloodGroup findByBloodGroupName(String bloodGroup) throws DbException;
 
-	List<BloodGroup> findAll();
+	List<BloodGroup> findAll() throws DbException;
 
-	BloodGroup findOne(int bloodGroupId);
+	BloodGroup findOne(int bloodGroupId) throws DbException;
 
 	void delete(int bloodGroupId);
 

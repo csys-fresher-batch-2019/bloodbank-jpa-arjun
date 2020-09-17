@@ -37,14 +37,14 @@ public class BloodGroupDAOImplTest {
 
 	}
 
-	private static void findAll() {
+	private static void findAll() throws DbException {
 
 		List<BloodGroup> list = bloodGroupDAO.findAll();
 		System.out.println(list);
 
 	}
 
-	private static void findByBloodGroup() {
+	private static void findByBloodGroup() throws DbException {
 
 		BloodGroup bloodGroupId = bloodGroupDAO.findOne(6);
 		System.out.println(bloodGroupId);

@@ -10,18 +10,71 @@ public class BloodGroupServiceTest {
 
 	private static BloodGroupService bloodGroupService = new BloodGroupService();
 
-	public static void main(String[] args) throws DbException, ServiceException {
+	public static void main(String[] args) throws ServiceException {
 
 		// findByBloodGroup();
+		// findByBloodGroupInvalid();
 		// findAll();
 		// findByBloodGroupId();
+		// findByBloodGroupIdInvalid();
 		// saveBloodGroup();
+		// saveBloodGroupInvalid();
 		// updateBloodGroup();
+		// updateBloodGroupInvalid();
+		// updateBloodGroupInvalidAlreadyExist();
 		// deleteBloodGroup();
+		// deleteBloodGroupInvalid();
 
 	}
 
-	private static void findByBloodGroup() throws DbException, ServiceException {
+	private static void updateBloodGroupInvalid() throws ServiceException {
+
+		BloodGroup bloodGroup = new BloodGroup();
+		bloodGroup.setBloodGroupId(1);
+		bloodGroup.setBloodGroup("");
+		bloodGroupService.update(bloodGroup);
+
+	}
+
+	private static void updateBloodGroupInvalidAlreadyExist() throws ServiceException {
+
+		BloodGroup bloodGroup = new BloodGroup();
+		bloodGroup.setBloodGroupId(1);
+		bloodGroup.setBloodGroup("AB+ve");
+		bloodGroupService.update(bloodGroup);
+
+	}
+
+	private static void saveBloodGroupInvalid() throws ServiceException {
+
+		BloodGroup bloodGroup = new BloodGroup();
+		bloodGroup.setBloodGroupId(1000);
+		bloodGroup.setBloodGroup("");
+		bloodGroupService.save(bloodGroup);
+
+	}
+
+	private static void deleteBloodGroupInvalid() throws ServiceException {
+
+		bloodGroupService.delete(100);
+
+	}
+
+	private static void findByBloodGroupIdInvalid() throws ServiceException {
+
+		BloodGroup bloodGroupId = bloodGroupService.findOne(0);
+		System.out.println(bloodGroupId);
+
+	}
+
+	private static void findByBloodGroupInvalid() throws ServiceException {
+
+		BloodGroup bloodGroup = bloodGroupService.findByBloodGroupName("  ");
+		System.out.println(bloodGroup);
+
+	}
+
+	private static void findByBloodGroup() throws ServiceException {
 
 		BloodGroup bloodGroup = bloodGroupService.findByBloodGroupName("B+ve");
 		System.out.println(bloodGroup);
@@ -50,10 +103,11 @@ public class BloodGroupServiceTest {
 
 	}
 
-	private static void updateBloodGroup() throws ServiceException, DbException {
+	private static void updateBloodGroup() throws ServiceException {
 
-		BloodGroup bloodGroup = bloodGroupService.findByBloodGroupName("A1B+ve");
-		bloodGroup.setBloodGroup("A1B-ve");
+		BloodGroup bloodGroup = new BloodGroup();
+		bloodGroup.setBloodGroupId(1);
+		bloodGroup.setBloodGroup("A+ve");
 		bloodGroupService.update(bloodGroup);
 
 	}
