@@ -2,6 +2,7 @@ package com.chainsys.bloodbankapp.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -23,6 +25,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @Entity
 @Table(name = "donor_details")
+@NamedQuery(name = "findAllUsers", query = "from User u where u.email = ?1")
 public class User {
 
 	@Id
@@ -48,10 +51,11 @@ public class User {
 	@Column(name = "password")
 	private String password;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "bg_id")
 	private BloodGroup bloodGroup;
 
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+	//@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)	//orphanRemoval = if we delete parent, then it automatically delete child
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)	//orphanRemoval(latest) = cascade(older)
 	private List<BloodDonation> bloodDonations;
 }

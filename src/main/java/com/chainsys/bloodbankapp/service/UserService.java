@@ -12,7 +12,7 @@ public class UserService {
 
 	private UserDAO userDAO = new UserDAOImpl();
 
-	List<User> findByBloodGroup(String bloodGroup) throws ServiceException {
+	public List<User> findByBloodGroup(String bloodGroup) throws ServiceException {
 
 		List<User> list = null;
 		try {
@@ -24,7 +24,7 @@ public class UserService {
 		return list;
 	}
 
-	List<User> findByBloodGroupWithCity(String bloodGroup, String city) throws ServiceException {
+	public List<User> findByBloodGroupWithCity(String bloodGroup, String city) throws ServiceException {
 
 		List<User> list = null;
 		try {
@@ -36,7 +36,7 @@ public class UserService {
 		return list;
 	}
 
-	User findByEmail(String email) throws ServiceException {
+	public User findByEmail(String email) throws ServiceException {
 		User user = null;
 		try {
 			user = userDAO.findByEmail(email);
@@ -48,7 +48,7 @@ public class UserService {
 
 	}
 
-	User findByUserId(int userId) throws ServiceException {
+	public User findByUserId(int userId) throws ServiceException {
 		User user = null;
 		try {
 			user = userDAO.findByUserId(userId);
@@ -59,7 +59,7 @@ public class UserService {
 		return user;
 	}
 
-	Long countInCity(String bloodGroup, String city) throws ServiceException {
+	public Long countInCity(String bloodGroup, String city) throws ServiceException {
 		Long count;
 		try {
 			count = userDAO.countInCity(bloodGroup, city);
@@ -70,7 +70,7 @@ public class UserService {
 		return count;
 	}
 
-	void save(User a) throws ServiceException {
+	public void save(User a) throws ServiceException {
 		try {
 			userDAO.save(a);
 		} catch (DbException e) {
@@ -79,7 +79,7 @@ public class UserService {
 		}
 	}
 
-	void update(User user) throws ServiceException {
+	public void update(User user) throws ServiceException {
 		try {
 			userDAO.update(user);
 		} catch (DbException e) {
@@ -88,7 +88,7 @@ public class UserService {
 		}
 	}
 
-	void delete(int userId) throws ServiceException {
+	public void delete(int userId) throws ServiceException {
 		try {
 			userDAO.delete(userId);
 		} catch (DbException e) {

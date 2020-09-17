@@ -1,9 +1,13 @@
 package com.chainsys.bloodbankapp.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.chainsys.bloodbankapp.exception.DbException;
 import com.chainsys.bloodbankapp.exception.ServiceException;
+import com.chainsys.bloodbankapp.model.BloodDonation;
 import com.chainsys.bloodbankapp.model.BloodGroup;
 import com.chainsys.bloodbankapp.model.User;
 
@@ -32,6 +36,8 @@ public class UserServiceTest {
 		////////////// save///////////////
 
 		// saveUser();
+
+		// saveUserWithDonation();
 
 		////////////// update///////////////
 
@@ -113,7 +119,7 @@ public class UserServiceTest {
 	private static void findByMailValid() throws ServiceException {
 
 		System.out.println("#### findByMailValid ####");
-		User user = userService.findByEmail("kumar@gmail.com");
+		User user = userService.findByEmail("arjunae798@gmail.com");
 		System.out.println(user);
 
 	}
@@ -168,6 +174,33 @@ public class UserServiceTest {
 		user.setBloodGroup(bg);
 		user.setMobileNumber(8979695789l);
 		user.setPassword("rathna");
+		userService.save(user);
+
+	}
+
+	private static void saveUserWithDonation() throws ServiceException {
+
+		User user = new User();
+		user.setUserName("Rathnakumar");
+		user.setGender("M");
+		user.setAge(24);
+		user.setEmail("rathnakumar2@gmail.com");
+		user.setActive(true);
+		user.setCity("Madurai");
+		BloodGroup bg = new BloodGroup();
+		bg.setBloodGroupId(10);
+		bg.setBloodGroup("AB1+ve");
+		user.setBloodGroup(bg);
+		user.setMobileNumber(8979695689l);
+		user.setPassword("rathna");
+		/*List<BloodDonation> bloodDonationList = new ArrayList<BloodDonation>();
+		BloodDonation bloodDonation = new BloodDonation();
+		bloodDonation.setUser(user);
+		bloodDonation.setDonatedOn(LocalDate.now());
+		bloodDonation.setCreatedOn(LocalDateTime.now());
+		bloodDonation.setModifiedOn(LocalDateTime.now());
+		bloodDonationList.add(bloodDonation);
+		user.setBloodDonations(bloodDonationList);*/
 		userService.save(user);
 
 	}
@@ -235,7 +268,7 @@ public class UserServiceTest {
 
 	private static void deleteByUserId() throws ServiceException {
 
-		userService.delete(152);
+		userService.delete(102);
 
 	}
 
