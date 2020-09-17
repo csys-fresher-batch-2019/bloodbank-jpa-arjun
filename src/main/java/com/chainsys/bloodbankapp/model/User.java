@@ -1,5 +1,7 @@
 package com.chainsys.bloodbankapp.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -22,7 +26,9 @@ import lombok.ToString;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE )
+	// @GeneratedValue(strategy = GenerationType.SEQUENCE )
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "donor_id_generator")
+	@SequenceGenerator(name = "donor_id_generator", sequenceName = "donor_id_seq")
 	@Column(name = "id")
 	private int userId;
 	@Column(name = "name")
@@ -46,4 +52,6 @@ public class User {
 	@JoinColumn(name = "bg_id")
 	private BloodGroup bloodGroup;
 
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+	private List<BloodDonation> bloodDonations;
 }

@@ -17,13 +17,13 @@ import lombok.ToString;
 @Entity
 @Table(name = "blood_group")
 public class BloodGroup {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE )
-	@Column(name = "id")
+	// @GeneratedValue(strategy = GenerationType.SEQUENCE )
+	@Column(name = "id", updatable = false, nullable = false)
 	private int bloodGroupId;
-	
-	@Column(name = "name")
+
+	@Column(name = "name", unique = true)
 	private String bloodGroup;
 
 }
