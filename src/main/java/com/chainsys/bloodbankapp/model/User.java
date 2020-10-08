@@ -15,6 +15,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,6 +36,7 @@ public class User {
 	@SequenceGenerator(name = "donor_id_generator", sequenceName = "donor_id_seq")
 	@Column(name = "id")
 	private int userId;
+	@NotNull @Size(min = 3, max = 30)
 	@Column(name = "name")
 	private String userName;
 	@Column(name = "gender")
@@ -50,8 +53,11 @@ public class User {
 	private long mobileNumber;
 	@Column(name = "password")
 	private String password;
+	@Column(name = "user_type")
+	private String userType;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	//@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)	// 20-09-2020 : is not working for "save" method // not required so see below line
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "bg_id")
 	private BloodGroup bloodGroup;
 

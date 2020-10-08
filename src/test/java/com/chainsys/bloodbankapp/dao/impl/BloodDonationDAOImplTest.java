@@ -29,7 +29,7 @@ public class BloodDonationDAOImplTest {
 
 	private static void findByUserId() {
 
-		int userId = 102;
+		int userId = 101;
 		List<BloodDonation> bloodDonation = bloodDonationDAO.findByUserId(userId);
 		System.out.println(bloodDonation);
 
@@ -46,7 +46,7 @@ public class BloodDonationDAOImplTest {
 
 		BloodDonation bloodDonation = new BloodDonation();
 		User user = new User();
-		user.setUserId(102);
+		user.setUserId(101);
 		bloodDonation.setUser(user);
 		bloodDonation.setDonatedOn(LocalDate.parse("2020-09-14"));
 		bloodDonation.setCreatedOn(LocalDateTime.now());

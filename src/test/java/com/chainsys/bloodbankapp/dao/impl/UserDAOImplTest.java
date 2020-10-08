@@ -163,7 +163,7 @@ public class UserDAOImplTest {
 
 		System.out.println("#### findByUserIdInValid ####");
 		UserDAO userDAO = new UserDAOImpl();
-		User user = userDAO.findByUserId(101);
+		User user = userDAO.findByUserId(106);
 		boolean existUserId = false;
 		if (user != null) {
 			existUserId = true;
@@ -198,10 +198,11 @@ public class UserDAOImplTest {
 		user.setActive(true);
 		user.setCity("Madurai");
 		BloodGroup bg = new BloodGroup();
-		bg.setBloodGroupId(3);
+		bg.setBloodGroupId(7);
 		user.setBloodGroup(bg);
-		user.setMobileNumber(8979696789l);
+		user.setMobileNumber(8979696321l);
 		user.setPassword("kumar");
+		user.setUserType("E");
 		userDAO.save(user);
 
 	}
@@ -219,7 +220,7 @@ public class UserDAOImplTest {
 	private static void updateEmail() throws DbException {
 
 		UserDAO userDAO = new UserDAOImpl();
-		User user = userDAO.findByUserId(52);
+		User user = userDAO.findByUserId(152);
 		user.setEmail("kumarrrrr@gmail.com");
 		userDAO.update(user);
 
@@ -230,7 +231,7 @@ public class UserDAOImplTest {
 		UserDAO userDAO = new UserDAOImpl();
 		BloodGroupDAO bloodGroupDAO = new BloodGroupDAOImpl();
 		BloodGroup bloodGroup = bloodGroupDAO.findByBloodGroupName("A+ve");
-		User user = userDAO.findByUserId(52);
+		User user = userDAO.findByUserId(152);
 		user.setBloodGroup(bloodGroup);
 		userDAO.update(user);
 
@@ -239,7 +240,7 @@ public class UserDAOImplTest {
 	private static void updateCity() throws DbException {
 
 		UserDAO userDAO = new UserDAOImpl();
-		User user = userDAO.findByUserId(52);
+		User user = userDAO.findByUserId(152);
 		user.setCity("Chennai");
 		userDAO.update(user);
 
@@ -248,7 +249,7 @@ public class UserDAOImplTest {
 	private static void updateName() throws DbException {
 
 		UserDAO userDAO = new UserDAOImpl();
-		User user = userDAO.findByUserId(52);
+		User user = userDAO.findByUserId(152);
 		user.setUserName("Kumarrr Kumar");
 		userDAO.update(user);
 
@@ -257,7 +258,7 @@ public class UserDAOImplTest {
 	private static void updateMobileNumber() throws DbException {
 
 		UserDAO userDAO = new UserDAOImpl();
-		User user = userDAO.findByUserId(52);
+		User user = userDAO.findByUserId(152);
 		user.setMobileNumber(9812736450l);
 		userDAO.update(user);
 
@@ -266,7 +267,7 @@ public class UserDAOImplTest {
 	private static void updatePassword() throws DbException {
 
 		UserDAO userDAO = new UserDAOImpl();
-		User user = userDAO.findByUserId(52);
+		User user = userDAO.findByUserId(152);
 		user.setPassword("kumar98");
 		userDAO.update(user);
 
@@ -277,7 +278,7 @@ public class UserDAOImplTest {
 	private static void deleteByUserId() throws DbException {
 
 		UserDAO userDAO = new UserDAOImpl();
-		userDAO.delete(52);
+		userDAO.delete(152);
 	}
 
 }

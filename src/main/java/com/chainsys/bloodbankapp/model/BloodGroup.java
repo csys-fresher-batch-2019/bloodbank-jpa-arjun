@@ -20,10 +20,10 @@ public class BloodGroup {
 
 	@Id
 	// @GeneratedValue(strategy = GenerationType.SEQUENCE )
-	@Column(name = "id", updatable = false, nullable = false)
+	@Column(name = "id", updatable = false, nullable = false)	//id can't be update and can't be null
 	private int bloodGroupId;
 
-	@Column(name = "name", unique = true)
+	@Column(name = "name", unique = true)	//name should be unique
 	private String bloodGroup;
 
 }

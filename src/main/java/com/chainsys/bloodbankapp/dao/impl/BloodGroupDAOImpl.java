@@ -16,6 +16,10 @@ public class BloodGroupDAOImpl implements BloodGroupDAO {
 
 	private static final EntityManagerFactory emf = JPAUtil.getEntityManagerFactory();
 
+	/**
+	 * This method will search by bloodGroup
+	 */
+	
 	public BloodGroup findByBloodGroupName(String bloodGroup) throws DbException {
 		BloodGroup bg = null;
 		try {

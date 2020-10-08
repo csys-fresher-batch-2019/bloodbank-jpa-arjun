@@ -25,7 +25,7 @@ public class BloodDonationServiceTest {
 
 		BloodDonation bloodDonation = new BloodDonation();
 		User user = new User();
-		user.setUserId(202);
+		user.setUserId(101);
 		bloodDonation.setUser(user);
 		bloodDonation.setDonatedOn(LocalDate.parse("2020-09-15"));
 		bloodDonation.setCreatedOn(LocalDateTime.now());
@@ -43,7 +43,7 @@ public class BloodDonationServiceTest {
 
 	private static void findByUserId() throws ServiceException {
 
-		int userId = 202;
+		int userId = 101;
 		List<BloodDonation> bloodDonation = bloodDonationService.findByUserId(userId);
 		System.out.println(bloodDonation);
 

@@ -12,8 +12,8 @@ public class BloodGroupServiceTest {
 
 	public static void main(String[] args) throws ServiceException {
 
-		// findByBloodGroup();
-		// findByBloodGroupInvalid();
+		 findByBloodGroup();
+		 findByBloodGroupInvalid();
 		// findAll();
 		// findByBloodGroupId();
 		// findByBloodGroupIdInvalid();
@@ -30,7 +30,7 @@ public class BloodGroupServiceTest {
 	private static void updateBloodGroupInvalid() throws ServiceException {
 
 		BloodGroup bloodGroup = new BloodGroup();
-		bloodGroup.setBloodGroupId(1);
+		bloodGroup.setBloodGroupId(10);
 		bloodGroup.setBloodGroup("");
 		bloodGroupService.update(bloodGroup);
 
@@ -39,7 +39,7 @@ public class BloodGroupServiceTest {
 	private static void updateBloodGroupInvalidAlreadyExist() throws ServiceException {
 
 		BloodGroup bloodGroup = new BloodGroup();
-		bloodGroup.setBloodGroupId(1);
+		bloodGroup.setBloodGroupId(10);
 		bloodGroup.setBloodGroup("AB+ve");
 		bloodGroupService.update(bloodGroup);
 
@@ -48,8 +48,9 @@ public class BloodGroupServiceTest {
 	private static void saveBloodGroupInvalid() throws ServiceException {
 
 		BloodGroup bloodGroup = new BloodGroup();
-		bloodGroup.setBloodGroupId(1000);
-		bloodGroup.setBloodGroup("");
+		bloodGroup.setBloodGroupId(100);
+		//bloodGroup.setBloodGroup("B+ve");
+		bloodGroup.setBloodGroup(" ");
 		bloodGroupService.save(bloodGroup);
 
 	}
@@ -106,8 +107,8 @@ public class BloodGroupServiceTest {
 	private static void updateBloodGroup() throws ServiceException {
 
 		BloodGroup bloodGroup = new BloodGroup();
-		bloodGroup.setBloodGroupId(1);
-		bloodGroup.setBloodGroup("A+ve");
+		bloodGroup.setBloodGroupId(10);
+		bloodGroup.setBloodGroup("Z+ve");
 		bloodGroupService.update(bloodGroup);
 
 	}

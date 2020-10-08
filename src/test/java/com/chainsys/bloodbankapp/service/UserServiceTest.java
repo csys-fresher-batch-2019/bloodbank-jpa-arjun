@@ -17,8 +17,8 @@ public class UserServiceTest {
 
 	public static void main(String[] args) throws ServiceException, DbException {
 
-		// findByBloodGroupValid();
-		// findByBloodGroupInValid();
+		 findByBloodGroupValid();
+		 findByBloodGroupInValid();
 
 		// findByBloodGroupWithCityValid();
 		// findByBloodGroupWithCityInValidBloodGroup();
@@ -68,7 +68,7 @@ public class UserServiceTest {
 	private static void findByBloodGroupValid() throws ServiceException {
 
 		System.out.println("#### findByBloodGroupValid ####");
-		List<User> list = userService.findByBloodGroup("B+ve");
+		List<User> list = userService.findByBloodGroup("A+ve");
 		System.out.println(list);
 
 	}
@@ -85,7 +85,7 @@ public class UserServiceTest {
 	private static void findByBloodGroupWithCityValid() throws ServiceException {
 
 		System.out.println("#### findByBloodGroupWithCityValid ####");
-		List<User> list = userService.findByBloodGroupWithCity("B+ve", "Madurai");
+		List<User> list = userService.findByBloodGroupWithCity("A+ve", "Madurai");
 		System.out.println(list);
 
 	}
@@ -101,7 +101,7 @@ public class UserServiceTest {
 	private static void findByBloodGroupWithCityInValidCity() throws ServiceException {
 
 		System.out.println("#### findByBloodGroupWithCityInValidCity ####");
-		List<User> list = userService.findByBloodGroupWithCity("B+ve", "Chennai");
+		List<User> list = userService.findByBloodGroupWithCity("A+ve", "Chennai");
 		System.out.println(list);
 
 	}
@@ -109,7 +109,7 @@ public class UserServiceTest {
 	private static void findByBloodGroupWithCityInValidBloodGroupAndCity() throws ServiceException {
 
 		System.out.println("#### findByBloodGroupWithCityInValidBloodGroupAndCity ####");
-		List<User> list = userService.findByBloodGroupWithCity("A+ve", "Chennai");
+		List<User> list = userService.findByBloodGroupWithCity("AB+ve", "Chennai");
 		System.out.println(list);
 
 	}
@@ -137,7 +137,7 @@ public class UserServiceTest {
 	private static void findByUserIdValid() throws ServiceException {
 
 		System.out.println("#### findByUserIdValid ####");
-		User user = userService.findByUserId(102);
+		User user = userService.findByUserId(101);
 		System.out.println(user);
 
 	}
@@ -174,6 +174,7 @@ public class UserServiceTest {
 		user.setBloodGroup(bg);
 		user.setMobileNumber(8979695789l);
 		user.setPassword("rathna");
+		user.setUserType("D");
 		userService.save(user);
 
 	}
@@ -209,7 +210,7 @@ public class UserServiceTest {
 
 	private static void updateDonateStatus() throws ServiceException {
 
-		User user = userService.findByEmail("rathnakumar@gmail.com"); // getting that row
+		User user = userService.findByEmail("rathnakumar2@gmail.com"); // getting that row
 		user.setActive(false);
 		userService.update(user);
 
@@ -217,7 +218,7 @@ public class UserServiceTest {
 
 	private static void updateEmail() throws ServiceException {
 
-		User user = userService.findByUserId(152);
+		User user = userService.findByUserId(252);
 		user.setEmail("rathnakumarrrrr@gmail.com");
 		userService.update(user);
 	}
@@ -226,7 +227,7 @@ public class UserServiceTest {
 
 		BloodGroupService bloodGroupService = new BloodGroupService();
 		BloodGroup bloodGroup = bloodGroupService.findByBloodGroupName("O+ve");
-		User user = userService.findByUserId(152);
+		User user = userService.findByUserId(252);
 		user.setBloodGroup(bloodGroup);
 		userService.update(user);
 
@@ -234,7 +235,7 @@ public class UserServiceTest {
 
 	private static void updateCity() throws ServiceException {
 
-		User user = userService.findByUserId(152);
+		User user = userService.findByUserId(252);
 		user.setCity("Chennai");
 		userService.update(user);
 
@@ -242,7 +243,7 @@ public class UserServiceTest {
 
 	private static void updateName() throws ServiceException {
 
-		User user = userService.findByUserId(152);
+		User user = userService.findByUserId(252);
 		user.setUserName("Rathna Kumar");
 		userService.update(user);
 
@@ -250,7 +251,7 @@ public class UserServiceTest {
 
 	private static void updateMobileNumber() throws ServiceException {
 
-		User user = userService.findByUserId(152);
+		User user = userService.findByUserId(252);
 		user.setMobileNumber(9876543210l);
 		userService.update(user);
 
@@ -258,7 +259,7 @@ public class UserServiceTest {
 
 	private static void updatePassword() throws ServiceException {
 
-		User user = userService.findByUserId(152);
+		User user = userService.findByUserId(252);
 		user.setPassword("rathnaKumar");
 		userService.update(user);
 
@@ -268,7 +269,7 @@ public class UserServiceTest {
 
 	private static void deleteByUserId() throws ServiceException {
 
-		userService.delete(102);
+		userService.delete(352);
 
 	}
 

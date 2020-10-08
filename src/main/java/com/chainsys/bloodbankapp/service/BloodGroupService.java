@@ -59,12 +59,12 @@ public class BloodGroupService {
 	public void delete(int bloodGroupId) throws ServiceException {
 
 		try {
-			bloodGroupValidator.validateBloodGroupId(bloodGroupId);
-			BloodGroup bloodGroup = bloodGroupDAO.findOne(bloodGroupId);
-			if (bloodGroup == null) {
+			bloodGroupValidator.validateBloodGroupId(bloodGroupId);			// case 1 : id <= 0 , then it throws exception
+			BloodGroup bloodGroup = bloodGroupDAO.findOne(bloodGroupId);	// case 2 : id = 1 to infinity	
+			if (bloodGroup == null) {										// case 3 : id = invalid , then it throws exception
 				throw new ValidatorException("Invalid BloodGroupId");
 			}
-			bloodGroupDAO.delete(bloodGroupId);
+			bloodGroupDAO.delete(bloodGroupId);								// case 4 : id = valid						
 		} catch (DbException e) {
 			e.printStackTrace();
 			throw new ServiceException("Unable to delete Blood Group");
@@ -91,14 +91,14 @@ public class BloodGroupService {
 	public void update(BloodGroup bloodGroup) throws ServiceException {
 
 		try {
-			bloodGroupValidator.validateBloodGroup(bloodGroup);
-			bloodGroupValidator.validateBloodGroupId(bloodGroup.getBloodGroupId());
-			BloodGroup bloodGroupObj = bloodGroupDAO.findOne(bloodGroup.getBloodGroupId());
-			if (bloodGroupObj == null) {
+			bloodGroupValidator.validateBloodGroup(bloodGroup);												// bg validatation
+			bloodGroupValidator.validateBloodGroupId(bloodGroup.getBloodGroupId());							// bg_id validatation
+			BloodGroup bloodGroupObj = bloodGroupDAO.findOne(bloodGroup.getBloodGroupId());					// getting row w.r.to bg_id
+			if (bloodGroupObj == null) {																	// if( bg_id is not in db),then it throws exception
 				throw new ValidatorException("Invalid BloodGroupId");
 			}
-			BloodGroup bloodGroupObj2 = bloodGroupDAO.findByBloodGroupName(bloodGroup.getBloodGroup());
-			if (bloodGroupObj2 != null) {
+			BloodGroup bloodGroupObj2 = bloodGroupDAO.findByBloodGroupName(bloodGroup.getBloodGroup());		// getting row w.r.to bg
+			if (bloodGroupObj2 != null) {																	// if( bg is already there), then it throws exception 	
 				throw new ValidatorException("BloodGroup Name already exists");
 			}
 			bloodGroupDAO.update(bloodGroup);

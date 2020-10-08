@@ -7,11 +7,11 @@ import com.chainsys.bloodbankapp.model.BloodGroup;
 
 public interface BloodGroupDAO {
 
-	BloodGroup findByBloodGroupName(String bloodGroup) throws DbException;
+	BloodGroup findByBloodGroupName(String bloodGroup) throws DbException;	//i/p = bloodGroup(B+ve) , o/p = bloodGroupId(3)
 
 	List<BloodGroup> findAll() throws DbException;
 
-	BloodGroup findOne(int bloodGroupId) throws DbException;
+	BloodGroup findOne(int bloodGroupId) throws DbException;	//i/p = bloodGroupId(3) , o/p = bloodGroup(B+ve)
 
 	void delete(int bloodGroupId);
 

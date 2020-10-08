@@ -10,7 +10,7 @@ public interface BloodDonationDAO {
 
 	List<BloodDonation> findAll();
 
-	List<BloodDonation> findByUserId(int userId);
+	List<BloodDonation> findByUserId(int userId);	
 
 	Long count();
 }
