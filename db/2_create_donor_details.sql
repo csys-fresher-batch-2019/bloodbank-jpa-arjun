@@ -19,6 +19,8 @@ constraint fk_blood foreign key(bg_id) references blood_group(id),
 constraint user_id_pk primary key(id)
 );
 
+alter table donor_details add( user_type char(1) default 'D');
+
 create sequence donor_id_seq start with 1 increment by 1;
 
 insert into donor_details(id,name,gender,age,email,bg_id,city,mobile_number,password)
@@ -29,6 +31,8 @@ values(donor_id_seq.nextval,'KESAVAN','M',21,'kesavanp555@gmail.com',3,'Coimbato
 
 insert into donor_details(id,name,gender,age,email,bg_id,city,mobile_number,password)
 values(donor_id_seq.nextval,'KARTHICK','M',20,'karrthicks10@gmail.com',5,'Chennai',7070707070,'karthick');
+
+update donor_details set user_type = 'E' where id = 51;
 
 commit;
 
